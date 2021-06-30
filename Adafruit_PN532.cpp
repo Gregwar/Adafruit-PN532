@@ -1532,7 +1532,7 @@ bool Adafruit_PN532::waitready(uint16_t timeout) {
   uint16_t timer = 0;
   while (!isready()) {
     if (timeout != 0) {
-      timer += 10;
+      timer += 1;
       if (timer > timeout) {
 #ifdef PN532DEBUG
         PN532DEBUGPRINT.println("TIMEOUT!");
@@ -1540,7 +1540,7 @@ bool Adafruit_PN532::waitready(uint16_t timeout) {
         return false;
       }
     }
-    delay(10);
+    delay(1);
   }
   return true;
 }
