@@ -122,7 +122,7 @@ static inline uint8_t i2c_recv(void) {
 /**************************************************************************/
 Adafruit_PN532::Adafruit_PN532(uint8_t clk, uint8_t miso, uint8_t mosi,
                                uint8_t ss) {
-  spi_dev = new Adafruit_SPIDevice(ss, clk, miso, mosi, 1000000,
+  spi_dev = new Adafruit_SPIDevice(ss, clk, miso, mosi, 250000,
                                    SPI_BITORDER_LSBFIRST, SPI_MODE0);
 }
 
@@ -149,7 +149,7 @@ Adafruit_PN532::Adafruit_PN532(uint8_t irq, uint8_t reset)
 /**************************************************************************/
 Adafruit_PN532::Adafruit_PN532(uint8_t ss) {
   spi_dev =
-      new Adafruit_SPIDevice(ss, 1000000, SPI_BITORDER_LSBFIRST, SPI_MODE0);
+      new Adafruit_SPIDevice(ss, 250000, SPI_BITORDER_LSBFIRST, SPI_MODE0);
 }
 
 /**************************************************************************/
@@ -571,7 +571,7 @@ bool Adafruit_PN532::startPassiveTargetIDDetection(uint8_t cardbaudrate) {
 bool Adafruit_PN532::readDetectedPassiveTargetID(uint8_t *uid,
                                                  uint8_t *uidLength) {
   // read data packet
-  readdata(pn532_packetbuffer, 20);
+  readdata(pn532_packetbuffer, 32);
   // check some basic stuff
 
   /* ISO14443A card response should be in the following format:
